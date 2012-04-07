@@ -13,6 +13,7 @@ public class Application extends Controller {
     }
 
     public static void yaml() {
+		request.format = "txt";
 		final List<Module> modules = Module.find("order by lower (fullname)").fetch();
 		render(modules);
     }

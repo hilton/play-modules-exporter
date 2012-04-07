@@ -1,5 +1,5 @@
-GET     /                                       Application.index
-GET /yaml   Application.yaml(format:'txt')
+GET /          Application.index
+GET /yaml   Application.yaml
 
 GET     /favicon.ico                            404
 GET     /public/                                staticDir:public

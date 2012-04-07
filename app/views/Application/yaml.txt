@@ -1,8 +1,8 @@
-models.PlayVersion(p1):
+models.PlayVersion(p124):
     majorVersion: 1
     name: 1.2.4
 
-models.PlayVersion(p2):
+models.PlayVersion(p20):
     majorVersion: 2
     name: 2.0
 
@@ -15,9 +15,16 @@ models.Module(m${module_index}):
     projectUrl: ${module.homepage}
     description: ${module.description}
 
-models.ModuleVersion(v${module_index}):
+#{list module.releases, as:'release'}
+models.ModuleVersion(m${module_index}v${release_index}):
     module: m${module_index}
-    compatibility: [ p1 ]
+    compatibility: [ p124 ]
+    versionCode: ${release.version}
+    releaseDate: ${release.publishedDate.format('yyyy-MM-dd')}
+#{if release.frameworkMatch}
+    releaseNotes: Works with Play ${release.frameworkMatch}
+#{/if}
 
+#{/list}
 
 #{/list}
