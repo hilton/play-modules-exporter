@@ -1,0 +1,23 @@
+models.PlayVersion(p1):
+    majorVersion: 1
+    name: 1.2.4
+
+models.PlayVersion(p2):
+    majorVersion: 2
+    name: 2.0
+
+
+#{list modules, as:'module'}
+models.Module(m${module_index}):
+    moduleKey: ${module.name}
+    moduleName: ${module.fullname}
+    contributors: ${module.author}
+    projectUrl: ${module.homepage}
+    description: ${module.description}
+
+models.ModuleVersion(v${module_index}):
+    module: m${module_index}
+    compatibility: [ p1 ]
+
+
+#{/list}
