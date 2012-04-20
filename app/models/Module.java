@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import java.util.List;
 
 /**
@@ -29,4 +30,7 @@ public class Module extends Model {
 	@OneToMany
 	@JoinColumn(name = "module_id", referencedColumnName = "id")
 	public List<ModuleRelease> releases;
+
+    @Transient
+    public User user;
 }

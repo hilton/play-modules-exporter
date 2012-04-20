@@ -3,21 +3,24 @@
 
 <h1>${modules.size()} modules</h1>
 
-<p><a href="@{yaml()}">YAML export for modules.playframework.org</a></p>
+<p>
+  <a href="@{yaml()}">YAML export for modules.playframework.org</a> |
+  <a href="@{users()}">Module authors</a>
+</p>
 		
 <table>
 <tr>
 	<th>name</th>
 	<th>fullname</th>
-	<!-- <th>author</th> -->
-	<th>releases</th>
+	<!--<th>releases</th>-->
+	<th>author</th>
 </tr>
 #{list modules, as:'module'}
 	<tr>
 		<td>${module.name}</td>
 		<td>${module.fullname}</td>
-		<!-- <td>${module.author}</td> -->
-		<td>${module.releases.join(', ')}</td>
+		<!-- <td>${module.releases.join(' ')}</td> -->
+		<td>${module.user?.name}</td>
 	</tr>
 #{/list}
 </table>

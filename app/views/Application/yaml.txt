@@ -1,30 +1,74 @@
-models.PlayVersion(p124):
-    majorVersion: 1
-    name: 1.2.4
+playVersions:
 
-models.PlayVersion(p20):
-    majorVersion: 2
-    name: 2.0
+    - !!models.PlayVersion
+        majorVersion: ONE
+        name: 1.2.4
+        documentationUrl: http://www.playframework.org/documentation/1.2.4/home
 
+    - !!models.PlayVersion
+        majorVersion: TWO
+        name: 2.0
+        documentationUrl: http://www.playframework.org/documentation/2.0/Home
+
+users:
+
+#{list users, as:'user'}
+    - !!models.User
+        id: ${user.id}
+        userName: ${user.name.slugify().replaceAll('-', '.')}
+#{if user.name == 'Stephane Epardaud'}
+        displayName: Stéphane Épardaud
+#{/if}
+#{else}
+        displayName: ${user.name}
+#{/else}
+        accountActive: true
+        password: none
+
+#{/list}
+
+modules:
 
 #{list modules, as:'module'}
-models.Module(m${module_index}):
-    moduleKey: ${module.name}
-    moduleName: ${module.fullname}
-    contributors: ${module.author}
-    projectUrl: ${module.homepage}
-    description: ${module.description}
+    - !!models.Module
+        id: ${module.id}
+        owner: !!models.User
+               id: ${module.user.id}
+        key: ${module.name.trim()}
+        name: "${module.fullname.trim()}"
+        summary: "${module.description ? module.description.split('\\.')[0] : '(none)'}"
+        description: "${module.description}"
+        contributors: ${module.author}
+        projectUrl: ${module.homepage}
+#{if module.name == 'jqueryui'}
+        organisation: Lunatech Research
+        licenseType: Apache License 2.0
+        licenseUrl: http://www.apache.org/licenses/LICENSE-2.0
+        createdOn: 2011-10-31
+        updatedOn: 2011-10-31
+#{/if}
+#{else}
+        organisation: (unknown)
+        licenseType: (unknown)
+#{/else}
 
+#{/list}
+
+*{
+versions:
+
+#{list modules, as:'module'}
 #{list module.releases, as:'release'}
-models.ModuleVersion(m${module_index}v${release_index}):
-    module: m${module_index}
-    compatibility: [ p124 ]
-    versionCode: ${release.version}
-    releaseDate: ${release.publishedDate.format('yyyy-MM-dd')}
+    - !!models.ModuleVersion
+        module: ${module.id}
+        compatibility: 1
+        versionCode: ${release.version}
+        releaseDate: ${release.publishedDate.format('yyyy-MM-dd')}
 #{if release.frameworkMatch}
-    releaseNotes: Works with Play ${release.frameworkMatch}
+        releaseNotes: frameworkMatch = ${release.frameworkMatch}
 #{/if}
 
 #{/list}
-
 #{/list}
+
+*}

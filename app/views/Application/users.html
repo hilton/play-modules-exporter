@@ -1,0 +1,10 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<h1>${users.size()} users</h1>
+
+<ol>
+#{list users, as:'user'}
+  <li>${user.name}</li>
+#{/list}
+</ol>
