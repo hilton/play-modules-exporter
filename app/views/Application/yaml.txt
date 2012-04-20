@@ -36,7 +36,7 @@ modules:
                id: ${module.user.id}
         key: ${module.name.trim()}
         name: "${module.fullname.trim()}"
-        summary: "${module.description ? module.description.split('\\.')[0] : '(none)'}"
+        summary: "&{'description.' + module.name}"
         description: "${module.description}"
         contributors: ${module.author}
         projectUrl: ${module.homepage}
