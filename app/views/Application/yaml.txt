@@ -1,14 +1,88 @@
 playVersions:
 
     - !!models.PlayVersion
+        id: 1
+        majorVersion: ONE
+        name: 1.0
+        documentationUrl: http://www.playframework.org/documentation/1.0/home
+
+    - !!models.PlayVersion
+        id: 2
+        majorVersion: ONE
+        name: 1.0.1
+        documentationUrl: http://www.playframework.org/documentation/1.0.1/home
+
+    - !!models.PlayVersion
+        id: 3
+        majorVersion: ONE
+        name: 1.0.2.1
+        documentationUrl: http://www.playframework.org/documentation/1.0.2.1/home
+
+    - !!models.PlayVersion
+        id: 4
+        majorVersion: ONE
+        name: 1.0.3.2
+        documentationUrl: http://www.playframework.org/documentation/1.0.3.2/home
+
+    - !!models.PlayVersion
+        id: 5
+        majorVersion: ONE
+        name: 1.1
+        documentationUrl: http://www.playframework.org/documentation/1.1/home
+
+    - !!models.PlayVersion
+        id: 6
+        majorVersion: ONE
+        name: 1.1.1
+        documentationUrl: http://www.playframework.org/documentation/1.1.1/home
+
+    - !!models.PlayVersion
+        id: 7
+        majorVersion: ONE
+        name: 1.2
+        documentationUrl: http://www.playframework.org/documentation/1.2/home
+
+    - !!models.PlayVersion
+        id: 8
+        majorVersion: ONE
+        name: 1.2.1
+        documentationUrl: http://www.playframework.org/documentation/1.2.1/home
+
+    - !!models.PlayVersion
+        id: 9
+        majorVersion: ONE
+        name: 1.2.2
+        documentationUrl: http://www.playframework.org/documentation/1.2.2/home
+
+    - !!models.PlayVersion
+        id: 10
+        majorVersion: ONE
+        name: 1.2.3
+        documentationUrl: http://www.playframework.org/documentation/1.2.3/home
+
+    - !!models.PlayVersion
+        id: 11
         majorVersion: ONE
         name: 1.2.4
         documentationUrl: http://www.playframework.org/documentation/1.2.4/home
 
     - !!models.PlayVersion
+        id: 12
+        majorVersion: ONE
+        name: 1.2.5
+        documentationUrl: http://www.playframework.org/documentation/1.2.5/home
+
+    - !!models.PlayVersion
+        id: 13
         majorVersion: TWO
         name: 2.0
         documentationUrl: http://www.playframework.org/documentation/2.0/Home
+
+    - !!models.PlayVersion
+        id: 14
+        majorVersion: TWO
+        name: 2.0.1
+        documentationUrl: http://www.playframework.org/documentation/2.0.1/Home
 
 users:
 
@@ -33,7 +107,7 @@ modules:
     - !!models.Module
         id: ${module.id}
         owner: !!models.User
-               id: ${module.user.id}
+            id: ${module.user.id}
         key: ${module.name.trim()}
         name: "${module.fullname.trim()}"
         summary: "&{'description.' + module.name}"
@@ -54,21 +128,25 @@ modules:
 
 #{/list}
 
-*{
 versions:
 
 #{list modules, as:'module'}
 #{list module.releases, as:'release'}
     - !!models.ModuleVersion
-        module: ${module.id}
-        compatibility: 1
+        playModule:
+            !!models.Module
+                id: ${module.id}
+        compatibility:
+            - !!models.PlayVersion
+                id: 12
         versionCode: ${release.version}
         releaseDate: ${release.publishedDate.format('yyyy-MM-dd')}
 #{if release.frameworkMatch}
-        releaseNotes: frameworkMatch = ${release.frameworkMatch}
+        releaseNotes: frameworkMatch=${release.frameworkMatch}
 #{/if}
+#{else}
+        releaseNotes: none
+#{/else}
 
 #{/list}
 #{/list}
-
-*}

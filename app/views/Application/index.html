@@ -12,17 +12,17 @@
 <tr>
 	<th>name</th>
 	<!--<th>fullname</th>-->
-	<!--<th>releases</th>-->
-	<th>author</th>
-	<th>summary</th>
+	<th>releases</th>
+	<!--<th>author</th>-->
+	<!--<th>summary</th>-->
 </tr>
 #{list modules, as:'module'}
 	<tr>
 		<td>${module.name}</td>
 		<!--<td>${module.fullname}</td>-->
-		<!-- <td>${module.releases.join(' ')}</td> -->
-		<td>${module.user?.name}</td>
-		<td>&{'description.' + module.name}</td>
+		 <td>${module.releases.join(' ')}</td>
+		<!--<td>${module.user?.name}</td>-->
+		<!--<td>&{'description.' + module.name}</td>-->
 	</tr>
 #{/list}
 </table>
