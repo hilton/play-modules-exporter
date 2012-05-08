@@ -5,7 +5,7 @@
         <meta charset="${_response_encoding}">
 		#{stylesheet 'main.css'/}
     </head>
-    <body>
+    <body class="${request.actionMethod}">
         #{doLayout /}
     </body>
 </html>

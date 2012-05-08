@@ -1,0 +1,33 @@
+#{extends 'main.html' /}
+#{set title:'Descriptions' /}
+
+<h1>${modules.size()} modules</h1>
+
+#{list modules, as:'module'}
+<h2 class="module">${module.name}</h2>
+
+<div class="description textile markup">
+${module.descriptionClean.nl2br()}
+</div>
+
+<div class="description markdown markup">
+${module.descriptionMarkdown.nl2br()}
+</div>
+
+<div class="description textile html">
+${module.descriptionClean.textile()}
+</div>
+
+<div class="description markdown html">
+${module.descriptionMarkdown.markdown()}
+</div>
+
+<div class="description textile rendered">
+${module.descriptionClean.textile().raw()}
+</div>
+
+<div class="description markdown rendered">
+${module.descriptionMarkdown.markdown().raw()}
+</div>
+
+#{/list}

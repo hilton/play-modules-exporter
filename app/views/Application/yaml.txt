@@ -111,7 +111,8 @@ modules:
         key: ${module.name.trim()}
         name: "${module.fullname.trim()}"
         summary: "&{'description.' + module.name}"
-        description: "${module.description}"
+        description: |
+            ${module.descriptionMarkdown.trim().replaceAll('\\"', '\\\\"').replaceAll('\\n', '\n            ')}
         contributors: ${module.author}
         projectUrl: ${module.homepage}
 #{if module.name == 'jqueryui'}

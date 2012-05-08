@@ -12,7 +12,6 @@ public class Application extends Controller {
 
     public static void index() {
 		final List<Module> modules = Module.find("order by lower (fullname)").fetch();
-        final SortedSet<User> users = setUsers(modules);
         render(modules);
     }
 
@@ -29,6 +28,11 @@ public class Application extends Controller {
         final SortedSet<User> users = setUsers(modules);
 
 		render(modules, users);
+    }
+
+    public static void descriptions() {
+        final List<Module> modules = Module.find("order by lower (fullname)").fetch();
+        render(modules);
     }
 
     /**

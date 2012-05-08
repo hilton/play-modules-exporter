@@ -2,3 +2,11 @@
 
 require:
     - play
+    - org.markdownj -> markdownj 0.3.0-1.0.2b4
+
+repositories:
+    - scala-tools:
+        type: iBiblio
+        root: "http://scala-tools.org/repo-releases/"
+        contains:
+            - org.markdownj -> *

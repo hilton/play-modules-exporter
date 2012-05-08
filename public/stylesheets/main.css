@@ -16,3 +16,45 @@ th, td {
 	padding: 0 0.2em;
 	vertical-align:top;
 }
+
+body.descriptions h2.module {
+  clear:both;
+  padding-top: 0.5em;
+  border-top: 2px solid #19ADE4;
+  margin-top: 0.5em;
+}
+
+body.descriptions pre {
+  background-color:#E9F4F9;
+}
+
+body.descriptions code {
+  color:#1487B4;
+}
+
+body.descriptions pre code {
+  color:black;
+}
+
+body.descriptions .textile {
+  clear:left;
+}
+
+body.descriptions .textile, body.descriptions .markdown {
+  float:left;
+}
+
+body.descriptions .description {
+  width:45%;
+  margin: 0 5% 0.5em 0;
+  border-top: dotted 1px #19ADE4;
+  padding-top: 0.5em;
+}
+
+body.descriptions .markup {
+  font-family:monospace;
+  white-space:pre-wrap;
+  overflow:scroll;
+  font-size:smaller;
+}
+

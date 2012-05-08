@@ -33,4 +33,53 @@ public class Module extends Model {
 
     @Transient
     public User user;
+
+    public String getDescriptionClean() {
+        String result = description.replaceAll("\\\\r\\\\n", "\n");
+        result = result.replaceAll("\\\\\"", "\"");
+        return result;
+    }
+
+    public String getDescriptionMarkdown() {
+        String result = getDescriptionClean();
+
+        // Line breaks
+        result = result.replaceAll("\\\\\\\\\\n", "  \n");
+
+        // Textile paragraphs
+        result = result.replaceAll("(^|\\n)p(\\(note\\))?\\.\\s+", "$1");
+
+        // Quote blocks
+        result = result.replaceAll("(^|\\n)bq\\. (.*)\\n\\n", "$1> $2\n\n");
+
+        // Code blocks
+        result = result.replaceAll("(\\n)bc\\. (.*)\\n\\n", "$1    $2\n\n");
+        result = result.replaceAll("(\\n)bc\\. (.*\\n)(.*\\n)?(.*\\n)?(.*\\n)?\\n", "$1    $2    $3    $4    $5\n\n");
+        result = result.replaceAll("\\n    \\n", "\n\n");
+        result = result.replaceAll("\\n\\n+", "\n\n");
+
+        // Lists
+        result = result.replaceAll("(^|\\n)# ", "$11. ");
+        result = result.replaceAll(" ?: ?\\n(-|\\*) ", ":\n\n* ");
+        result = result.replaceAll("(^|\\n)\\*\\* ", "$1  * ");
+        result = result.replaceAll("(^|\\n)- ", "$1* ");
+
+        // Headings
+        result = result.replaceAll("(^|\\n)h1\\.\\s+", "$1# ");
+        result = result.replaceAll("(^|\\n)h2\\.\\s+", "$1## ");
+        result = result.replaceAll("(^|\\n)h3\\.\\s+", "$1### ");
+
+        // Code
+        result = result.replaceAll("@\\b([^@]+)@", "`$1`");
+
+        // Emphasis
+        result = result.replaceAll("([^\\*])\\*\\b([^\\*]+)\\*([^\\*])", "$1**$2**$3");
+
+        // Links
+        result = result.replaceAll("\"([^\"]+)\":(\\S+)", "[$1]($2)");
+
+        result = result.replaceAll("\\n+$", "");
+
+        return result;
+    }
 }

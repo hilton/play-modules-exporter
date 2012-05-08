@@ -2,3 +2,8 @@
 *.ipr
 *.iws
 tmp
+.classpath
+.project
+.settings
+eclipse
+lib

@@ -1,6 +1,7 @@
 GET /       Application.index
 GET /yaml   Application.yaml
 GET /users  Application.users
+GET /descriptions  Application.descriptions
 
 GET     /favicon.ico                            404
 GET     /public/                                staticDir:public
