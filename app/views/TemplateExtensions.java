@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 /**
- *
+ * Extensions to render wiki syntax as HTML.
  */
 public class TemplateExtensions extends JavaExtensions {
 
@@ -21,9 +21,7 @@ public class TemplateExtensions extends JavaExtensions {
     }
 
     public static String markdown(String markup) {
-        String html = new MarkdownProcessor().markdown(markup);
-//        html = html.substring(html.indexOf("<body>") + 6, html.lastIndexOf("</body>"));
-        return html;
+        return new MarkdownProcessor().markdown(markup);
     }
 
 
